@@ -53,7 +53,8 @@ export const CARDS = [
     question: "Does your electricity stay on reliably, all day?",
     yesText: "You probably charged your phone twice today and didn't once think about whether the power would stay on. That background reliability — invisible to you — is a daily luxury billions don't have.",
     noText: "You know the calculation — when to charge what, which appliances to run when, how to plan around the outages. That awareness is its own kind of tax that the always-on world never has to pay.",
-    odds: "1 in 68,260,000,000,000,000,000,000"
+    yesOdds: "1 in 68,260,000,000,000,000,000,000",
+    noOdds: "1 in 426,625,000,000,000,000,000,000"
   },
   {
     number: 8,
