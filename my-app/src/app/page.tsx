@@ -1,10 +1,12 @@
 'use client'
 import { useState } from 'react';
+import AgeCard from '@/../components/agecard';
 import StarBackground from '@/../components/starBackground';
 import ProgressBar from '@/../components/progressbar';
 //import StandardCard from '@/../components/standardcard';
 import OddsBar from '@/../components/oddsbar';
 import ToggleCard from '@/../components/togglecard';
+import TravelCard from '@/../components/travelcard';
 
 
 const testCard = {
@@ -27,6 +29,8 @@ export default function Page() {
   {/* <h1>Progress Bar Example</h1>  */}
       <ProgressBar total={20}  current={3}/>
       <ToggleCard card={testCard} index={6} total={20} onChoice={setChoice}/>
+      <AgeCard index={6} total={20}/>
+      <TravelCard index={5} total={20}/>
       {/* <StandardCard card={testCard} title={testCard.title} text={testCard.text} total={20} index={0}/> */}
       {/* <OddsBar odds={testCard.odds}/> */}
       <OddsBar odds={choice === 'yes' 
