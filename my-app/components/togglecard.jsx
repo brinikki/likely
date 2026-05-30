@@ -6,7 +6,7 @@ export default function ToggleCard({ card, index, total, onChoice }) {
   const [choice, setChoice] = useState(null)
 
   return (
-    <div className="flex flex-col items-center text-center max-w-xl w-full">
+    <div className="flex flex-col items-center text-center max-w-xl w-full gap-3">
 
       <p className="text-xs tracking-widest uppercase text-stone-600 mb-6">
         {String(index + 1).padStart(2, '0')} / {total}
@@ -39,7 +39,7 @@ export default function ToggleCard({ card, index, total, onChoice }) {
           onClick={() => {setChoice('no'); onChoice('no')}}
           className={`px-8 py-3 text-xs tracking-widest uppercase font-medium border rounded-md transition-all duration-200 ${
             choice === 'no'
-              ? 'bg-rose-950 text-rose-200 border-rose-950'
+              ? 'bg-lime-950 text-lime-100 border-lime-950'
               : 'bg-transparent text-stone-600 border-stone-800 hover:border-stone-600 hover:text-stone-100'
           }`}
         >
@@ -52,7 +52,7 @@ export default function ToggleCard({ card, index, total, onChoice }) {
           ? 'opacity-0'
           : choice === 'yes'
           ? 'text-emerald-600'
-          : 'text-rose-400'
+          : 'text-lime-100'
       }`}>
         {choice === 'yes' ? card.yesText : choice === 'no' ? card.noText : ''}
       </p>

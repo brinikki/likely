@@ -36,14 +36,14 @@ export default function TravelCard({ index, total }) {
 
   const miles = Math.min(Math.round(raw * raw / 500 * MAX_MILES / 500), MAX_MILES)
   const displayMiles = miles >= MAX_MILES ? '7,000+' : miles.toLocaleString()
-  const pct = Math.min(100, (miles / MAX_MILES) * 100)
+  const pct = Math.min(1500, (miles / MAX_MILES) * 100)
   const insight = INSIGHTS.find(i => miles <= i.max) || INSIGHTS[INSIGHTS.length - 1]
 
   const bars = [
     { label: 'You', pct, value: miles >= MAX_MILES ? '7k+ mi' : miles.toLocaleString() + ' mi', color: '#eeeaddff', textColor: '#c9b88a' },
-    { label: '1800s avg', pct: 5, value: '~50 mi', color: '#3d3b37', textColor: '#3d3b37' },
-    { label: 'Medieval', pct: 2.5, value: '~25 mi', color: '#2e2c28', textColor: '#3d3b37' },
-    { label: 'Stone age', pct: 1, value: '~10 mi', color: '#1e1c18', textColor: '#3d3b37' },
+    { label: '1800s avg', pct: 1.5, value: '~50 mi', color: '#3d3b37', textColor: '#3d3b37' },
+    { label: 'Medieval', pct: 1, value: '~25 mi', color: '#2e2c28', textColor: '#3d3b37' },
+    { label: 'Stone age', pct: .5, value: '~10 mi', color: '#1e1c18', textColor: '#3d3b37' },
   ]
 
   return (
