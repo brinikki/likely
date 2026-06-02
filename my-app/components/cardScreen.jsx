@@ -1,9 +1,9 @@
-import StandardCard from /../components/StandardCard;
-import ToggleCard from /../components/ToggleCard;
-import AgeCard from /../components/AgeCard;
-import TravelCard from /../components/TravelCard;
-import ProgressBar from /../components/ProgressBar;
-import OddsBar from /../components/OddsBar;
+import StandardCard from './standardcard'
+import ToggleCard from './togglecard'
+import AgeCard from './agecard'
+import TravelCard from './travelcard'
+import ProgressBar from './progressbar'
+import OddsBar from './oddsbar'
 
 export default function CardScreen({ cards, currentIndex, onNext, onBack, onChoice }) {
     const card = cards[currentIndex]
@@ -16,10 +16,10 @@ export default function CardScreen({ cards, currentIndex, onNext, onBack, onChoi
     }
 
     return (
-        <div className="relative min-h-screen flex flex-col items-center justify-between p-10">
+        <div className="relative min-h-screen flex flex-col items-center justify-between p-10 pt-8">
             <ProgressBar total={cards.length} current={currentIndex}/>
 
-            <div className="flex-1 flex items-center justify-center w-full">
+            <div className="flex-1 flex items-center justify-center w-full max-w-2xl mx-auto">
                 {renderCard()}
             </div>
 

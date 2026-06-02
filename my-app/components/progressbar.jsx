@@ -9,7 +9,7 @@ export default function ProgressBar({ total, current }) {
               ? 'bg-amber-600'
               : i === current
               ? 'bg-stone-100'
-              : 'bg-stone-800'
+              : 'bg-stone-700'
           }`}
         />
       ))}

@@ -1,42 +1,68 @@
 'use client'
 import { useState } from 'react';
-import AgeCard from '@/../components/agecard';
-import StarBackground from '@/../components/starBackground';
-import ProgressBar from '@/../components/progressbar';
-//import StandardCard from '@/../components/standardcard';
-import OddsBar from '@/../components/oddsbar';
-import ToggleCard from '@/../components/togglecard';
-import TravelCard from '@/../components/travelcard';
+import {CARDS} from '../../data/cards';
+import StarBackground from '../../components/starBackground';
+//import ProgressBar from '@/../components/progressbar';
+import IntroScreen from '../../components/introScreen';
+import CardScreen from '../../components/cardScreen';
+import FinalScreen from '../../components/finalScreen';
 
-
-const testCard = {
-  title: "Electricity was on all day",
-  baseText: "Rolling blackouts are a daily reality in Nigeria, Pakistan, and South Africa. Most of the world plans their day around power availability.",
-  question: "Does your electricity stay on reliably, all day?",
-  yesText: "You probably charged your phone twice today and didn't once think about whether the power would stay on. That background reliability — invisible to you — is a daily luxury billions don't have.",
-  noText: "You know the calculation — when to charge what, which appliances to run when, how to plan around the outages. That awareness is its own kind of tax that the always-on world never has to pay.",
-  yesOdds: "1 in 68,260,000,000,000,000,000,000",
-  noOdds: "1 in 426,625,000,000,000,000,000,000"
-}
 
 
 export default function Page() {
   // change odds number based on toggle clicked
+  const [screen, setScreen] = useState('intro')
+  const [currentIndex, setCurrentIndex] = useState(0)
   const [choice, setChoice] = useState(null)
+
+  function handleStart() {
+    setScreen('card')
+  }
+
+  function handleNext() {
+    if (currentIndex === CARDS.length - 1) {
+      setScreen('final')
+    } else {
+      setCurrentIndex(currentIndex + 1)
+    }
+  }
+
+  function handleBack() {
+    if (currentIndex === 0) {
+      setScreen('intro')
+    } else {
+      setCurrentIndex(currentIndex - 1)
+    }
+  }
+
+   function handleRestart() {
+    setCurrentIndex(0)
+    setChoice(null)
+    setScreen('intro')  
+   }
+
   return (
     <div className="bg-stone-950 min-h-screen p-10 flex flex-col items-center gap-30">
       <StarBackground />
-  {/* <h1>Progress Bar Example</h1>  */}
-      <ProgressBar total={20}  current={3}/>
-      <ToggleCard card={testCard} index={6} total={20} onChoice={setChoice}/>
-      <AgeCard index={6} total={20}/>
-      <TravelCard index={5} total={20}/>
-      {/* <StandardCard card={testCard} title={testCard.title} text={testCard.text} total={20} index={0}/> */}
-      {/* <OddsBar odds={testCard.odds}/> */}
-      <OddsBar odds={choice === 'yes' 
+      {/* <ProgressBar total={20}  current={3}/> */}
+      {/* <ToggleCard card={testCard} index={6} total={20} onChoice={setChoice}/>
+      <TravelCard index={5} total={20}/> */}
+      <div className="relative z-10">
+        {screen === 'intro' && (<IntroScreen onStart={handleStart} />)}
+        {screen === 'card' && (<CardScreen 
+          cards={CARDS} 
+          currentIndex={currentIndex}
+          onNext={handleNext}
+          onBack={handleBack}
+          onChoice={setChoice}
+        />)}
+        {screen === 'final' && (<FinalScreen onRestart={handleRestart} />)}
+      </div>
+
+      {/* <OddsBar odds={choice === 'yes' 
           ? testCard.yesOdds
-          : testCard.noOdds} 
-/>
+          : testCard.noOdds}  */}
+
     </div>
   );
 }
