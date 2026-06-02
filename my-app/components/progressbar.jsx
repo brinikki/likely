@@ -6,7 +6,7 @@ export default function ProgressBar({ total, current }) {
           key={i}
           className={`flex-1 h-px rounded-sm transition-all duration-500 ${
             i < current
-              ? 'bg-amber-600'
+              ? 'bg-orange-200'
               : i === current
               ? 'bg-stone-100'
               : 'bg-stone-700'
