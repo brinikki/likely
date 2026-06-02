@@ -1,4 +1,5 @@
 'use client'
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import {CARDS} from '../../data/cards';
 import StarBackground from '../../components/starBackground';
@@ -16,7 +17,7 @@ export default function Page() {
   const [choice, setChoice] = useState(null)
 
   function handleStart() {
-    setScreen('card')
+    setScreen('cards')
   }
 
   function handleNext() {
@@ -47,23 +48,57 @@ export default function Page() {
       {/* <ProgressBar total={20}  current={3}/> */}
       {/* <ToggleCard card={testCard} index={6} total={20} onChoice={setChoice}/>
       <TravelCard index={5} total={20}/> */}
-      <div className="relative z-10">
-        {screen === 'intro' && (<IntroScreen onStart={handleStart} />)}
-        {screen === 'card' && (<CardScreen 
-          cards={CARDS} 
-          currentIndex={currentIndex}
-          onNext={handleNext}
-          onBack={handleBack}
-          onChoice={setChoice}
-        />)}
-        {screen === 'final' && (<FinalScreen onRestart={handleRestart} />)}
-      </div>
+
+
+    <AnimatePresence mode="wait">
+      {screen === 'intro' && (
+        <motion.div
+          key="intro"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <IntroScreen onStart={handleStart} />
+        </motion.div>
+      )}
+
+      {screen === 'cards' && (
+        <motion.div
+          key="cards"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <CardScreen
+            cards={CARDS}
+            currentIndex={currentIndex}
+            onNext={handleNext}
+            onBack={handleBack}
+            onChoice={setChoice}
+          />
+        </motion.div>
+      )}
+
+      {screen === 'final' && (
+        <motion.div
+          key="final"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <FinalScreen onRestart={handleRestart} />
+        </motion.div>
+      )}
+    </AnimatePresence>
 
       {/* <OddsBar odds={choice === 'yes' 
           ? testCard.yesOdds
           : testCard.noOdds}  */}
 
     </div>
-  );
+  )
 }
 

@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'framer-motion' 
 import StandardCard from './standardcard'
 import ToggleCard from './togglecard'
 import AgeCard from './agecard'
@@ -19,9 +20,20 @@ export default function CardScreen({ cards, currentIndex, onNext, onBack, onChoi
         <div className="relative min-h-screen flex flex-col items-center justify-between p-10 pt-8">
             <ProgressBar total={cards.length} current={currentIndex}/>
 
-            <div className="flex-1 flex items-center justify-center w-full max-w-2xl mx-auto">
-                {renderCard()}
-            </div>
+        <div className="flex-1 flex items-center justify-center w-full max-w-2xl mx-auto">
+         <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -24 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full flex justify-center"
+          >
+            {renderCard()}
+          </motion.div>
+         </AnimatePresence>
+        </div>
 
             <div className="flex w-full flex-col items-center gap-4">
                 <OddsBar odds={card.odds}/>
